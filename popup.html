@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=560">
+  <link rel="stylesheet" href="popup.css">
+  <title>Take me to America</title>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div class="brand">
+        <img class="brand-logo" src="icons/icon128.png" alt="Take me to America">
+        <div class="brand-text">
+          <h1>Take me to America</h1>
+          <div class="ljiljan-badge">Ljiljan Edition</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="langToggleBtn" class="lang-toggle" type="button" title="Prevedi na bosanski">BS</button>
+        <a href="https://buymeacoffee.com/secerbeg" target="_blank" class="header-coffee" title="Buy me a coffee">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-1.128 2.208.236 4.756 2.088 6.266L8 13.252l4.513-3.933C14.364 7.81 15.728 5.261 14.6 3.053 13.486.878 10.4.28 8.717 2.01L8 2.748z"/></svg>
+        </a>
+        <span class="badge" id="liveBadge" style="display:none;">
+          <span class="live-dot"></span> LIVE
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div id="noData" class="empty-state">
+    <div class="empty-icon">
+      <img src="icons/icon128.png" width="72" height="72" alt="">
+    </div>
+    <p class="empty-title" id="emptyTitle">Take me to America</p>
+    <p class="empty-hint" id="emptyHint">Open the FIFA resale ticket site and browse a seat map. This passive version captures only what FIFA loads on screen.</p>
+    <a class="btn btn-small" id="emptyAction" href="#" style="display:none;"></a>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" style="display:none;">
+
+    <!-- Match Info -->
+    <div class="match-info" id="matchInfo"></div>
+
+    <div class="section-search-bar">
+      <input type="text" id="sectionSearch" class="section-search-input" placeholder="Search section / block only (example: 101)" />
+      <button id="sectionClearBtn" class="section-search-clear" type="button">Clear</button>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="statsBar"></div>
+
+    <!-- Category Tabs + Content -->
+    <div class="section cat-tabs-section">
+      <div class="cat-tabs" id="catTabs"></div>
+      <div id="catContent"></div>
+    </div>
+
+    <!-- Block Breakdown -->
+    <div class="section">
+      <div class="section-header collapsible" id="blockToggle">
+        <h2 id="blockBreakdownTitle">Block Breakdown</h2>
+        <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6l4 4 4-4"/>
+        </svg>
+      </div>
+      <div class="table-wrap collapsible-body" id="blockBody" style="display:none;">
+        <table class="data-table" id="blockTable">
+          <thead>
+            <tr>
+              <th>Block</th>
+              <th>Area</th>
+              <th class="num">Seats</th>
+              <th class="num">Min</th>
+              <th class="num">Max</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section Loader -->
+    <div class="scan-section" id="scanSection">
+      <div class="section-loader-header">
+        <div>
+          <div class="section-loader-title">Section Loader</div>
+          <div class="section-loader-subtitle">Discover sections, then load them one by one</div>
+        </div>
+      </div>
+      <div class="section-loader-actions">
+        <button id="scanBtn" class="btn btn-scan">
+          <span id="scanBtnText">Discover Sections</span>
+        </button>
+        <button id="loadAllBtn" class="btn btn-primary">Load All Discovered</button>
+      </div>
+      <div class="scan-progress" id="scanProgress" style="display:none;">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-text" id="progressText">0%</span>
+      </div>
+      <div class="coverage-status" id="coverageStatus">No discovered sections yet.</div>
+      <div class="coverage-list" id="coverageList" style="display:none;"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button id="exportBtn" class="btn btn-primary">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 2v8m0 0l-3-3m3 3l3-3"/>
+          <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2"/>
+        </svg>
+        <span id="exportBtnLabel">Export CSV</span>
+      </button>
+      <button id="clearBtn" class="btn btn-danger">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 4h12M5 4V3a1 1 0 011-1h4a1 1 0 011 1v1m2 0v9a1 1 0 01-1 1H4a1 1 0 01-1-1V4h10z"/>
+        </svg>
+        <span id="clearBtnLabel">Clear Data</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <a href="https://buymeacoffee.com/secerbeg" target="_blank" class="footer-link kofi">
+      <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-1.128 2.208.236 4.756 2.088 6.266L8 13.252l4.513-3.933C14.364 7.81 15.728 5.261 14.6 3.053 13.486.878 10.4.28 8.717 2.01L8 2.748z"/></svg>
+      Buy Me a Coffee
+    </a>
+    <span class="footer-sep"></span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

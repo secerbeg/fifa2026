@@ -1,0 +1,5 @@
+Chrome Web Store preparation updates applied:
+- manifest description improved for store submission
+- permissions kept minimal for current functionality
+- host permissions kept narrow: *.tickets.fifa.com only
+- ZIP structure preserved with manifest.json at root
