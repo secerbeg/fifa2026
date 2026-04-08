@@ -4,312 +4,233 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Take me to America – FIFA 2026 Ticket Helper</title>
+
   <style>
-    :root { --bg:#0b1d3a; --bg2:#13386c; --gold:#f2c300; --gold2:#ffd84d; --text:#10233f; --muted:#5e6b7e; --card:#fff; --line:#dde5f0; --soft:#f6f8fc; --green:#1f8f4e; }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--text); background:linear-gradient(180deg,var(--soft),#eef3fb); line-height:1.55; }
-    .hero { background:radial-gradient(circle at top right, rgba(242,195,0,0.18), transparent 28%), linear-gradient(135deg,var(--bg),var(--bg2)); color:white; padding:56px 20px 42px; }
-    .wrap { max-width:1020px; margin:0 auto; }
-    .hero h1 { margin:0 0 10px; font-size:40px; line-height:1.1; letter-spacing:-0.02em; }
-    .hero p { margin:0; max-width:760px; color:rgba(255,255,255,0.92); font-size:18px; }
-    .topbar { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
-    .cta-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
-    .btn { display:inline-block; text-decoration:none; border-radius:10px; padding:12px 16px; font-weight:700; border:1px solid transparent; }
-    .btn-primary { background:linear-gradient(180deg,var(--gold2),var(--gold)); color:#162947; }
-    .btn-secondary { background:rgba(255,255,255,0.08); color:white; border-color:rgba(255,255,255,0.18); }
-    .lang-toggle { display:inline-flex; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); border-radius:999px; padding:6px; }
-    .flag-btn { width:42px; height:32px; display:grid; place-items:center; border:0; border-radius:999px; cursor:pointer; background:transparent; color:white; font-size:22px; }
-    .flag-btn.active { background:rgba(255,255,255,0.18); }
-    .main { padding:28px 20px 60px; }
-    .grid { display:grid; grid-template-columns:1.2fr 0.8fr; gap:22px; align-items:start; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 6px 18px rgba(16,35,63,0.05); margin-bottom:18px; }
-    h2 { font-size:24px; margin:0 0 12px; color:#0d2750; }
-    h3 { font-size:18px; margin:18px 0 8px; color:#12376d; }
-    p, li { font-size:15px; }
-    .muted { color:var(--muted); }
-    .steps { counter-reset:step; padding:0; margin:0; list-style:none; }
-    .steps li { counter-increment:step; position:relative; padding:0 0 0 44px; margin:0 0 14px; }
-    .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:30px; height:30px; border-radius:999px; background:linear-gradient(180deg,var(--gold2),var(--gold)); color:#13294c; font-weight:700; display:grid; place-items:center; }
-    .code { background:#0f1f38; color:#e8f0fb; border-radius:12px; padding:14px 16px; overflow-x:auto; font-family:Consolas,Monaco,monospace; font-size:13px; white-space:pre-wrap; }
-    .pill { display:inline-block; padding:4px 9px; border-radius:999px; background:rgba(31,143,78,0.10); color:var(--green); font-size:12px; font-weight:700; margin-right:8px; margin-bottom:8px; }
-    ul.clean { padding-left:18px; margin-top:8px; }
-    .download-box { border:1px dashed #b9c7da; background:#f8fbff; border-radius:14px; padding:16px; }
-    .small { font-size:13px; }
-    footer { padding:28px 20px 40px; color:var(--muted); font-size:13px; text-align:center; }
+    :root {
+      --bg:#0b1d3a;
+      --bg2:#13386c;
+      --gold:#f2c300;
+      --gold2:#ffd84d;
+      --text:#10233f;
+      --muted:#5e6b7e;
+      --card:#fff;
+      --line:#dde5f0;
+    }
+
+    body {
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#f6f8fc;
+      color:var(--text);
+    }
+
+    .hero {
+      background:linear-gradient(135deg,var(--bg),var(--bg2));
+      color:white;
+      padding:40px 20px 30px;
+    }
+
+    .wrap {
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    .topbar {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    .flag-toggle {
+      display:flex;
+      gap:6px;
+      background:rgba(255,255,255,0.1);
+      border-radius:999px;
+      padding:6px;
+    }
+
+    .flag-btn {
+      border:none;
+      background:transparent;
+      font-size:20px;
+      cursor:pointer;
+      padding:4px 8px;
+      border-radius:999px;
+    }
+
+    .flag-btn.active {
+      background:rgba(255,255,255,0.25);
+    }
+
+    .hero-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .hero h1 {
+      margin:0 0 10px;
+      font-size:36px;
+    }
+
+    .hero p {
+      margin:0 0 20px;
+      color:rgba(255,255,255,0.9);
+    }
+
+    .btn {
+      display:inline-block;
+      padding:12px 16px;
+      border-radius:8px;
+      font-weight:bold;
+      text-decoration:none;
+    }
+
+    .btn-primary {
+      background:linear-gradient(var(--gold2), var(--gold));
+      color:#162947;
+    }
+
+    /* Screenshot placeholder */
+    .screenshot {
+      background:white;
+      border-radius:12px;
+      height:260px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#777;
+      font-size:14px;
+      border:2px dashed #ccc;
+    }
+
+    .main {
+      padding:30px 20px;
+    }
+
+    .card {
+      background:white;
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:20px;
+      border:1px solid var(--line);
+    }
+
+    h2 {
+      margin-top:0;
+    }
+
     [data-lang] { display:none; }
-    html.lang-bs [data-lang="bs"] { display:initial; }
-    html.lang-en [data-lang="en"] { display:initial; }
-    html.lang-bs .list-bs, html.lang-en .list-en { display:block; }
-    html.lang-bs .list-en, html.lang-en .list-bs { display:none; }
-    @media (max-width:860px) { .grid { grid-template-columns:1fr; } .hero h1 { font-size:32px; } .hero p { font-size:16px; } .topbar { flex-direction:column; } }
+    html.lang-bs [data-lang="bs"] { display:block; }
+    html.lang-en [data-lang="en"] { display:block; }
+
+    @media(max-width:800px){
+      .hero-grid { grid-template-columns:1fr; }
+    }
   </style>
 </head>
+
 <body>
-  <section class="hero">
-    <div class="wrap">
-      <div class="topbar">
-        <div>
-          <div class="pill"><span data-lang="bs">Bosanski zadani jezik</span><span data-lang="en">Bosnian default</span></div>
-          <div class="pill">EN / BS</div>
-          <div class="pill"><span data-lang="bs">Učitavanje sektora</span><span data-lang="en">Section loader</span></div>
-        </div>
-        <div class="lang-toggle" aria-label="Language toggle">
-          <button class="flag-btn" id="bsBtn" title="Bosanski" aria-label="Bosanski">🇧🇦</button>
-          <button class="flag-btn" id="enBtn" title="English" aria-label="English">🇺🇸</button>
-        </div>
-      </div>
-      <h1>
-        <span data-lang="bs">Take me to America<br>FIFA 2026 pomoćnik za karte</span>
-        <span data-lang="en">Take me to America<br>FIFA 2026 Ticket Helper</span>
-      </h1>
-      <p>
-        <span data-lang="bs">Chrome ekstenzija za pregled FIFA resale mape sjedišta, poređenje učitanih sjedišta, filtriranje po kategoriji i sektoru, i brže pronalaženje boljih ponuda.</span>
-        <span data-lang="en">A Chrome extension for browsing FIFA resale seat maps, comparing loaded seats, filtering by category and section, and helping you find better deals faster.</span>
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="./take-me-to-america-fifa-scraper.zip">
-          <span data-lang="bs">Preuzmi ZIP ekstenzije</span>
-          <span data-lang="en">Download Extension ZIP</span>
-        </a>
-        <a class="btn btn-secondary" href="https://buymeacoffee.com/secerbeg" target="_blank" rel="noopener noreferrer">
-          <span data-lang="bs">Kupi mi kafu</span>
-          <span data-lang="en">Buy me a coffee</span>
-        </a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+
+    <div class="topbar">
+      <div></div>
+
+      <div class="flag-toggle">
+        <button class="flag-btn" id="bsBtn">🇧🇦</button>
+        <button class="flag-btn" id="enBtn">🇺🇸</button>
       </div>
     </div>
-  </section>
 
-  <main class="main">
-    <div class="wrap grid">
+    <div class="hero-grid">
+
+      <!-- TEXT -->
       <div>
-        <section class="card">
-          <h2><span data-lang="bs">Šta ova ekstenzija radi</span><span data-lang="en">What this extension does</span></h2>
-          <p>
-            <span data-lang="bs">Ovaj alat pomaže da analiziraš FIFA resale sjedišta koja su učitana u tvom browseru. Podrazumijevano koristi bosanski, može se prebaciti na engleski, i uključuje pretragu sektora, filtere po kategoriji, “Best 100s” i sigurniji workflow za učitavanje kategorija i sektora.</span>
-            <span data-lang="en">This tool helps you analyze FIFA resale seats that are loaded in your browser. It defaults to Bosnian, can switch to English, and includes section search, category filters, “Best 100s”, and a safer category / section loading workflow.</span>
-          </p>
-          <h3><span data-lang="bs">Trenutne funkcije</span><span data-lang="en">Current features</span></h3>
-          <ul class="clean list-bs">
-            <li>Brže pronalaženje najjeftinijih učitanih sjedišta i boljih ponuda</li>
-            <li>Filteri po kategorijama sa pojednostavljenim kategorijama 1–4 + Ostalo</li>
-            <li>Pretraga sektora / bloka</li>
-            <li>Best 100s pregled za blokove u rasponu 100–199</li>
-            <li>Popup prvo na bosanskom uz EN preklop</li>
-            <li>Otkrivanje sektora i kontrolisano učitavanje</li>
-            <li>Izvoz učitanih sjedišta u CSV</li>
-          </ul>
-          <ul class="clean list-en">
-            <li>Find cheapest loaded seats and better deals faster</li>
-            <li>Category filters with simplified categories 1–4 + Other</li>
-            <li>Section / block search</li>
-            <li>Best 100s summary for blocks in the 100–199 range</li>
-            <li>Bosnian-first popup with English toggle</li>
-            <li>Section discovery and controlled loading tools</li>
-            <li>Export loaded seats to CSV</li>
-          </ul>
-          <h3><span data-lang="bs">Važno ograničenje</span><span data-lang="en">Important limitation</span></h3>
-          <p class="muted">
-            <span data-lang="bs">Ekstenzija radi sa onim što FIFA učita na stranici i sa kontrolisanim učitavanjem sektora. Ako svi sektori nisu učitani, “lowest” je najniža trenutno učitana cijena, a ne uvijek garantovano najniža iz cijelog inventara.</span>
-            <span data-lang="en">The extension works with what FIFA loads on the page and with controlled section loading. If every section is not loaded, the “lowest” value is the lowest loaded so far, not always a guaranteed full-inventory lowest.</span>
-          </p>
-        </section>
+        <h1>
+          <span data-lang="bs">FIFA 2026 pomoćnik za karte</span>
+          <span data-lang="en">FIFA 2026 Ticket Helper</span>
+        </h1>
 
-        <section class="card" id="install">
-          <h2><span data-lang="bs">Kako uvesti ekstenziju u Chrome</span><span data-lang="en">How to import into Chrome</span></h2>
-          <ol class="steps list-bs">
-            <li>Preuzmi ZIP sa ove stranice.</li>
-            <li>Raspakuj ZIP u običan folder na računaru.</li>
-            <li>Otvori Chrome i idi na <strong>chrome://extensions</strong>.</li>
-            <li>Uključi <strong>Developer mode</strong> gore desno.</li>
-            <li>Klikni <strong>Load unpacked</strong>.</li>
-            <li>Izaberi raspakovani folder koji sadrži <strong>manifest.json</strong>.</li>
-          </ol>
-          <ol class="steps list-en">
-            <li>Download the ZIP from this page.</li>
-            <li>Extract the ZIP to a normal folder on your computer.</li>
-            <li>Open Chrome and go to <strong>chrome://extensions</strong>.</li>
-            <li>Turn on <strong>Developer mode</strong> in the top-right corner.</li>
-            <li>Click <strong>Load unpacked</strong>.</li>
-            <li>Select the extracted folder that contains <strong>manifest.json</strong>.</li>
-          </ol>
-          <div class="download-box">
-            <strong><span data-lang="bs">Važno:</span><span data-lang="en">Important:</span></strong>
-            <p class="small muted" style="margin:8px 0 0;">
-              <span data-lang="bs">Nemoj birati ZIP direktno. Prvo ga raspakuj, pa izaberi folder koji sadrži <strong>manifest.json</strong>, <strong>popup.html</strong>, <strong>background.js</strong> i <strong>icons</strong> folder.</span>
-              <span data-lang="en">Do not select the ZIP directly. You must extract it first, then choose the folder that has <strong>manifest.json</strong>, <strong>popup.html</strong>, <strong>background.js</strong>, and the <strong>icons</strong> folder.</span>
-            </p>
-          </div>
-        </section>
+        <p>
+          <span data-lang="bs">
+            Ekstenzija za brže pronalaženje najboljih FIFA resale karata.
+          </span>
+          <span data-lang="en">
+            Extension to quickly find the best FIFA resale tickets.
+          </span>
+        </p>
 
-        <section class="card" id="configure">
-          <h2><span data-lang="bs">Kako podesiti i koristiti</span><span data-lang="en">How to configure and use it</span></h2>
-          <h3><span data-lang="bs">Prvo korištenje</span><span data-lang="en">First use</span></h3>
-          <ol class="steps list-bs">
-            <li>Otvori FIFA resale mapu sjedišta u Chrome-u.</li>
-            <li>Klikaj po sektorima na mapi da FIFA učita podatke o sjedištima.</li>
-            <li>Otvori popup ekstenzije.</li>
-            <li>Po potrebi prebaci jezik između bosanskog i engleskog.</li>
-          </ol>
-          <ol class="steps list-en">
-            <li>Open the FIFA resale seat map page in Chrome.</li>
-            <li>Click around sections on the map so FIFA loads seat data.</li>
-            <li>Open the extension popup.</li>
-            <li>Use the language toggle to switch between Bosnian and English if needed.</li>
-          </ol>
-          <h3><span data-lang="bs">Preporučeni workflow</span><span data-lang="en">Recommended workflow</span></h3>
-          <ol class="steps list-bs">
-            <li>Otvori mapu sjedišta za utakmicu.</li>
-            <li>Prvo ručno klikaj nekoliko sektora.</li>
-            <li>Otvori ekstenziju i klikni <strong>Discover Sections</strong>.</li>
-            <li>Koristi filtere po kategoriji da se fokusiraš na željenu kategoriju.</li>
-            <li>Koristi <strong>Load this category</strong> ili <strong>Load All Discovered</strong> po potrebi.</li>
-            <li>Koristi pretragu sektora da suziš popup na određeni blok ili zonu.</li>
-            <li>Izvezi u CSV ako želiš poslije porediti.</li>
-          </ol>
-          <ol class="steps list-en">
-            <li>Open a match seat map.</li>
-            <li>Click around some sections manually first.</li>
-            <li>Open the extension and click <strong>Discover Sections</strong>.</li>
-            <li>Use category filters to focus on the seat category you care about.</li>
-            <li>Use <strong>Load this category</strong> or <strong>Load All Discovered</strong> as needed.</li>
-            <li>Use section search to narrow the popup to a specific block or area.</li>
-            <li>Export to CSV if you want to compare later.</li>
-          </ol>
-          <h3><span data-lang="bs">Šta znače glavna polja</span><span data-lang="en">What the key fields mean</span></h3>
-          <ul class="clean list-bs">
-            <li><strong>Cheapest</strong>: najniža trenutno učitana cijena</li>
-            <li><strong>Best 100s</strong>: najjeftinije učitano sjedište u sektoru / bloku 100–199</li>
-            <li><strong>Category coverage</strong>: koliko je kompletna trenutno izabrana kategorija</li>
-            <li><strong>Overall coverage</strong>: koliko je otkrivenih sektora do sada učitano</li>
-          </ul>
-          <ul class="clean list-en">
-            <li><strong>Cheapest</strong>: lowest currently loaded price</li>
-            <li><strong>Best 100s</strong>: cheapest loaded seat in section / block 100–199</li>
-            <li><strong>Category coverage</strong>: how complete the currently selected category appears to be</li>
-            <li><strong>Overall coverage</strong>: how many discovered sections have been loaded so far</li>
-          </ul>
-        </section>
-
-        <section class="card">
-          <h2><span data-lang="bs">Fajlovi koje trebaš vidjeti nakon raspakivanja</span><span data-lang="en">Files you should see after extracting</span></h2>
-          <div class="code">manifest.json
-popup.html
-popup.js
-popup.css
-background.js
-content.js
-injected.js
-icons/
-  icon16.png
-  icon48.png
-  icon128.png</div>
-        </section>
-
-        <section class="card">
-          <h2><span data-lang="bs">Rješavanje problema</span><span data-lang="en">Troubleshooting</span></h2>
-          <h3><span data-lang="bs">Nema podataka</span><span data-lang="en">No data appears</span></h3>
-          <ul class="clean list-bs">
-            <li>Provjeri da li si na FIFA seat map stranici, a ne samo na glavnoj tickets stranici</li>
-            <li>Prvo klikaj po mapi da FIFA učita podatke</li>
-            <li>Osvježi stranicu jednom nakon učitavanja ekstenzije</li>
-          </ul>
-          <ul class="clean list-en">
-            <li>Make sure you are on the FIFA seat map page, not just the main tickets page</li>
-            <li>Click around the map first so FIFA loads data</li>
-            <li>Reload the page once after loading the extension</li>
-          </ul>
-          <h3><span data-lang="bs">Klik na kategoriju se čudno ponaša</span><span data-lang="en">Category click acts strangely</span></h3>
-          <ul class="clean list-bs">
-            <li>Klik na kategoriju treba samo filtrirati</li>
-            <li>Koristi <strong>Load this category</strong> samo kad želiš učitati više sektora za tu kategoriju</li>
-          </ul>
-          <ul class="clean list-en">
-            <li>Category tabs should only filter</li>
-            <li>Use <strong>Load this category</strong> only when you want more sections for that category</li>
-          </ul>
-          <h3><span data-lang="bs">Pokrivenost izgleda nepotpuna</span><span data-lang="en">Coverage looks incomplete</span></h3>
-          <ul class="clean list-bs">
-            <li>To znači da svi otkriveni sektori još nisu vratili seat podatke</li>
-            <li>Koristi <strong>Load All Discovered</strong> ili nastavi ručno pregledati mapu</li>
-          </ul>
-          <ul class="clean list-en">
-            <li>This means not all discovered sections have returned seat data yet</li>
-            <li>Use <strong>Load All Discovered</strong> or keep browsing the seat map manually</li>
-          </ul>
-        </section>
+        <a class="btn btn-primary" href="./take-me-to-america-fifa-scraper.zip">
+          <span data-lang="bs">Preuzmi ekstenziju</span>
+          <span data-lang="en">Download extension</span>
+        </a>
       </div>
 
-      <aside>
-        <section class="card">
-          <h2><span data-lang="bs">Preuzimanje</span><span data-lang="en">Download</span></h2>
-          <p class="muted">
-            <span data-lang="bs">Najnoviji build koji se koristi na ovoj stranici:</span>
-            <span data-lang="en">Latest downloadable build used for this page:</span>
-          </p>
-          <p><a class="btn btn-primary" href="./take-me-to-america-fifa-scraper.zip"><span data-lang="bs">Preuzmi ZIP</span><span data-lang="en">Download ZIP</span></a></p>
-          <p class="small muted">
-            <span data-lang="bs">Naziv fajla na ovoj stranici:</span>
-            <span data-lang="en">File name included on this page:</span>
-            <strong>take-me-to-america-fifa-scraper.zip</strong>
-          </p>
-        </section>
+      <!-- SCREENSHOT PLACEHOLDER -->
+      <div class="screenshot">
+        <span data-lang="bs">📸 Ovdje dodaj screenshot popup-a</span>
+        <span data-lang="en">📸 Add popup screenshot here</span>
+      </div>
 
-        <section class="card">
-          <h2><span data-lang="bs">Za GitHub Pages</span><span data-lang="en">For GitHub Pages</span></h2>
-          <p>
-            <span data-lang="bs">Uploaduj <strong>index.html</strong> i ZIP fajl u svoj <strong>secerbeg.github.io/fifa2026/</strong> folder u repozitoriju.</span>
-            <span data-lang="en">Upload <strong>index.html</strong> and the ZIP file into your <strong>secerbeg.github.io/fifa2026/</strong> folder in your repository.</span>
-          </p>
-          <div class="code">/fifa2026/
-  index.html
-  take-me-to-america-fifa-scraper.zip</div>
-        </section>
-
-        <section class="card">
-          <h2><span data-lang="bs">Predložena release napomena</span><span data-lang="en">Suggested release note</span></h2>
-          <p class="small muted">
-            <span data-lang="bs">Bosnian-first FIFA 2026 ticket helper sa filterima po kategoriji, section loader-om, pretragom, CSV izvozom i sigurnijim učitavanjem po kategoriji.</span>
-            <span data-lang="en">Bosnian-first FIFA 2026 ticket helper with category filters, section loader, search, CSV export, and safer category-specific loading.</span>
-          </p>
-        </section>
-
-        <section class="card">
-          <h2><span data-lang="bs">Podrška</span><span data-lang="en">Support</span></h2>
-          <p class="muted">
-            <span data-lang="bs">Ako ti ovaj alat pomaže da brže nađeš bolje FIFA karte, možeš podržati projekat ovdje:</span>
-            <span data-lang="en">If this tool helps you find better FIFA tickets faster, you can support the project here:</span>
-          </p>
-          <p><a class="btn btn-secondary" style="color:#12376d;border-color:#d7e0ee;background:#f9fbff;" href="https://buymeacoffee.com/secerbeg" target="_blank" rel="noopener noreferrer">buymeacoffee.com/secerbeg</a></p>
-        </section>
-      </aside>
     </div>
-  </main>
 
-  <footer>
-    <span data-lang="bs">Ovaj projekat je nezavisan i nije povezan sa FIFA-om. Koristi odgovorno i provjeri sva pravila stranice koja se primjenjuju.</span>
-    <span data-lang="en">This project is independent and not affiliated with FIFA. Use responsibly and review any site terms that apply.</span>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    const STORAGE_KEY = "fifa2026-site-lang";
-    function applyLang(lang) {
-      document.documentElement.classList.remove("lang-bs", "lang-en");
-      document.documentElement.classList.add(lang === "en" ? "lang-en" : "lang-bs");
-      document.documentElement.lang = lang === "en" ? "en" : "bs";
-      document.getElementById("bsBtn").classList.toggle("active", lang !== "en");
-      document.getElementById("enBtn").classList.toggle("active", lang === "en");
-      localStorage.setItem(STORAGE_KEY, lang);
-    }
-    function detectInitialLang() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === "en" || saved === "bs") return saved;
-      const browserLang = (navigator.language || "").toLowerCase();
-      if (browserLang.startsWith("en")) return "en";
-      return "bs";
-    }
-    document.getElementById("bsBtn").addEventListener("click", () => applyLang("bs"));
-    document.getElementById("enBtn").addEventListener("click", () => applyLang("en"));
-    applyLang(detectInitialLang());
-  </script>
+<!-- MAIN -->
+<div class="main">
+  <div class="wrap">
+
+    <div class="card">
+      <h2>
+        <span data-lang="bs">Kako instalirati</span>
+        <span data-lang="en">How to install</span>
+      </h2>
+
+      <ol data-lang="bs">
+        <li>Preuzmi ZIP</li>
+        <li>Raspakuj</li>
+        <li>Idi na chrome://extensions</li>
+        <li>Uključi Developer mode</li>
+        <li>Load unpacked</li>
+      </ol>
+
+      <ol data-lang="en">
+        <li>Download ZIP</li>
+        <li>Extract it</li>
+        <li>Go to chrome://extensions</li>
+        <li>Enable Developer mode</li>
+        <li>Load unpacked</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = "lang";
+
+function setLang(lang){
+  document.documentElement.classList.remove("lang-bs","lang-en");
+  document.documentElement.classList.add(lang === "en" ? "lang-en" : "lang-bs");
+
+  document.getElementById("bsBtn").classList.toggle("active", lang==="bs");
+  document.getElementById("enBtn").classList.toggle("active", lang==="en");
+
+  localStorage.setItem(STORAGE_KEY, lang);
+}
+
+document.getElementById("bsBtn").onclick = ()=>setLang("bs");
+document.getElementById("enBtn").onclick = ()=>setLang("en");
+
+// default Bosnian
+setLang(localStorage.getItem(STORAGE_KEY) || "bs");
+</script>
+
 </body>
 </html>
