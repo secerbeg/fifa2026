@@ -1,8 +1,1 @@
-Files included for GitHub Pages hosting:
-- index.html
-- take-me-to-america-fifa-scraper.zip
-
-Upload both files into:
-https://secerbeg.github.io/fifa2026/
-
-If using a GitHub repository, place them in the fifa2026 directory of your Pages branch.
+Files included for GitHub Pages hosting:\n- index.html\n- take-me-to-america-fifa-scraper.zip\n\nBosnian is the default/fallback language. The page also remembers the last selected language in localStorage.\n
