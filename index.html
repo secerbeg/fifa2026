@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA 2026 Ticket Helper – Take me to America</title>
+  <style>
+    :root { --bg:#0b1d3a; --bg2:#13386c; --gold:#f2c300; --gold2:#ffd84d; --text:#10233f; --muted:#5e6b7e; --card:#fff; --line:#dde5f0; --soft:#f6f8fc; --green:#1f8f4e; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--text); background:linear-gradient(180deg,var(--soft),#eef3fb); line-height:1.55; }
+    .hero { background:radial-gradient(circle at top right, rgba(242,195,0,0.18), transparent 28%), linear-gradient(135deg,var(--bg),var(--bg2)); color:white; padding:56px 20px 42px; }
+    .wrap { max-width:1020px; margin:0 auto; }
+    .hero h1 { margin:0 0 10px; font-size:40px; line-height:1.1; letter-spacing:-0.02em; }
+    .hero p { margin:0; max-width:760px; color:rgba(255,255,255,0.92); font-size:18px; }
+    .cta-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+    .btn { display:inline-block; text-decoration:none; border-radius:10px; padding:12px 16px; font-weight:700; border:1px solid transparent; }
+    .btn-primary { background:linear-gradient(180deg,var(--gold2),var(--gold)); color:#162947; }
+    .btn-secondary { background:rgba(255,255,255,0.08); color:white; border-color:rgba(255,255,255,0.18); }
+    .main { padding:28px 20px 60px; }
+    .grid { display:grid; grid-template-columns:1.2fr 0.8fr; gap:22px; align-items:start; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 6px 18px rgba(16,35,63,0.05); margin-bottom:18px; }
+    h2 { font-size:24px; margin:0 0 12px; color:#0d2750; }
+    h3 { font-size:18px; margin:18px 0 8px; color:#12376d; }
+    p, li { font-size:15px; }
+    .muted { color:var(--muted); }
+    .steps { counter-reset:step; padding:0; margin:0; list-style:none; }
+    .steps li { counter-increment:step; position:relative; padding:0 0 0 44px; margin:0 0 14px; }
+    .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:30px; height:30px; border-radius:999px; background:linear-gradient(180deg,var(--gold2),var(--gold)); color:#13294c; font-weight:700; display:grid; place-items:center; }
+    .code { background:#0f1f38; color:#e8f0fb; border-radius:12px; padding:14px 16px; overflow-x:auto; font-family:Consolas,Monaco,monospace; font-size:13px; white-space:pre-wrap; }
+    .pill { display:inline-block; padding:4px 9px; border-radius:999px; background:rgba(31,143,78,0.10); color:var(--green); font-size:12px; font-weight:700; margin-right:8px; margin-bottom:8px; }
+    ul.clean { padding-left:18px; margin-top:8px; }
+    .download-box { border:1px dashed #b9c7da; background:#f8fbff; border-radius:14px; padding:16px; }
+    .small { font-size:13px; }
+    footer { padding:28px 20px 40px; color:var(--muted); font-size:13px; text-align:center; }
+    @media (max-width:860px) { .grid { grid-template-columns:1fr; } .hero h1 { font-size:32px; } .hero p { font-size:16px; } }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="wrap">
+      <div class="pill">Bosnian default</div>
+      <div class="pill">EN / BS toggle</div>
+      <div class="pill">Section loader</div>
+      <h1>Take me to America<br>FIFA 2026 Ticket Helper</h1>
+      <p>A Chrome extension for browsing FIFA resale seat maps, comparing loaded seats, filtering by category and section, and helping you find better deals faster.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="./take-me-to-america-fifa-scraper.zip">Download Extension ZIP</a>
+        <a class="btn btn-secondary" href="https://buymeacoffee.com/secerbeg" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="wrap grid">
+      <div>
+        <section class="card">
+          <h2>What this extension does</h2>
+          <p>This tool helps you analyze FIFA resale seats that are loaded in your browser. It supports Bosnian by default, can switch between Bosnian and English, and includes section search, category filters, “Best 100s”, and a safer category / section loading workflow.</p>
+          <h3>Current features</h3>
+          <ul class="clean">
+            <li>Find cheapest loaded seats and best deals faster</li>
+            <li>Category filters with simplified categories 1–4 + Other</li>
+            <li>Section / block search</li>
+            <li>Best 100s summary for blocks in the 100–199 range</li>
+            <li>Bosnian-first popup with English toggle</li>
+            <li>Section discovery and controlled loading tools</li>
+            <li>Export loaded seats to CSV</li>
+          </ul>
+          <h3>Important limitation</h3>
+          <p class="muted">The extension is designed to work with what FIFA loads in the page and with controlled section loading. If every section is not loaded, the “lowest” value is the lowest loaded so far, not always a guaranteed full-inventory lowest.</p>
+        </section>
+
+        <section class="card" id="install">
+          <h2>How to import into Chrome</h2>
+          <ol class="steps">
+            <li>Download the ZIP from this page.</li>
+            <li>Extract the ZIP to a normal folder on your computer.</li>
+            <li>Open Chrome and go to <strong>chrome://extensions</strong>.</li>
+            <li>Turn on <strong>Developer mode</strong> in the top-right corner.</li>
+            <li>Click <strong>Load unpacked</strong>.</li>
+            <li>Select the extracted folder that contains <strong>manifest.json</strong>.</li>
+          </ol>
+          <div class="download-box">
+            <strong>Important:</strong>
+            <p class="small muted" style="margin:8px 0 0;">Do not select the ZIP directly. You must extract it first, then choose the folder that has <strong>manifest.json</strong>, <strong>popup.html</strong>, <strong>background.js</strong>, and the <strong>icons</strong> folder.</p>
+          </div>
+        </section>
+
+        <section class="card" id="configure">
+          <h2>How to configure and use it</h2>
+          <h3>First use</h3>
+          <ol class="steps">
+            <li>Open the FIFA resale seat map page in Chrome.</li>
+            <li>Click around sections on the map so FIFA loads seat data.</li>
+            <li>Open the extension popup.</li>
+            <li>Use the language toggle to switch between Bosnian and English if needed.</li>
+          </ol>
+          <h3>Recommended workflow</h3>
+          <ol class="steps">
+            <li>Open a match seat map.</li>
+            <li>Click around some sections manually first.</li>
+            <li>Open the extension and click <strong>Discover Sections</strong>.</li>
+            <li>Use category filters to focus on the seat category you care about.</li>
+            <li>Use <strong>Load this category</strong> or <strong>Load All Discovered</strong> as needed.</li>
+            <li>Use section search to narrow the popup to a specific block or area.</li>
+            <li>Export to CSV if you want to compare later.</li>
+          </ol>
+          <h3>What the key fields mean</h3>
+          <ul class="clean">
+            <li><strong>Cheapest</strong>: lowest currently loaded price</li>
+            <li><strong>Best 100s</strong>: cheapest loaded seat in section / block 100–199</li>
+            <li><strong>Category coverage</strong>: how complete the currently selected category appears to be</li>
+            <li><strong>Overall coverage</strong>: how many discovered sections have been loaded so far</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Files you should see after extracting</h2>
+          <div class="code">manifest.json
+popup.html
+popup.js
+popup.css
+background.js
+content.js
+injected.js
+icons/
+  icon16.png
+  icon48.png
+  icon128.png</div>
+        </section>
+
+        <section class="card">
+          <h2>Troubleshooting</h2>
+          <h3>No data appears</h3>
+          <ul class="clean">
+            <li>Make sure you are on the FIFA seat map page, not just the main tickets page</li>
+            <li>Click around the map first so FIFA loads data</li>
+            <li>Reload the page once after loading the extension</li>
+          </ul>
+          <h3>Category click acts strangely</h3>
+          <ul class="clean">
+            <li>Category tabs should only filter</li>
+            <li>Use <strong>Load this category</strong> only when you want more sections for that category</li>
+          </ul>
+          <h3>Coverage looks incomplete</h3>
+          <ul class="clean">
+            <li>This means not all discovered sections have returned seat data yet</li>
+            <li>Use <strong>Load All Discovered</strong> or keep browsing the seat map manually</li>
+          </ul>
+        </section>
+      </div>
+
+      <aside>
+        <section class="card">
+          <h2>Download</h2>
+          <p class="muted">Latest downloadable build used for this page:</p>
+          <p><a class="btn btn-primary" href="./take-me-to-america-fifa-scraper.zip">Download ZIP</a></p>
+          <p class="small muted">File name included on this page: <strong>take-me-to-america-fifa-scraper.zip</strong></p>
+        </section>
+
+        <section class="card">
+          <h2>For GitHub Pages</h2>
+          <p>Upload <strong>index.html</strong> and the ZIP file into your <strong>secerbeg.github.io/fifa2026/</strong> folder in your repository.</p>
+          <div class="code">/fifa2026/
+  index.html
+  take-me-to-america-fifa-scraper.zip</div>
+        </section>
+
+        <section class="card">
+          <h2>Suggested release note</h2>
+          <p class="small muted">Bosnian-first FIFA 2026 ticket helper with category filters, section loader, search, CSV export, and safer category-specific loading.</p>
+        </section>
+
+        <section class="card">
+          <h2>Support</h2>
+          <p class="muted">If this tool helps you find better FIFA tickets faster, you can support the project here:</p>
+          <p><a class="btn btn-secondary" style="color:#12376d;border-color:#d7e0ee;background:#f9fbff;" href="https://buymeacoffee.com/secerbeg" target="_blank" rel="noopener noreferrer">buymeacoffee.com/secerbeg</a></p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>This project is independent and not affiliated with FIFA. Use responsibly and review any site terms that apply.</footer>
+</body>
+</html>
